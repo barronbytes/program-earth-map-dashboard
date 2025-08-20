@@ -3,6 +3,14 @@ import { PawPrint, Droplets, Mountain, Calendar } from 'lucide-react';
 import type { DataLayer } from '@/types/map';
 import { Checkbox } from '@/components/UI/CheckBox';
 
+/**
+ * Props for the LayerControls component
+ * @interface LayerControlsProps
+ * @property {DataLayer[]} layers - Array of available map layers
+ * @property {string} activeLayerType - Currently selected layer type
+ * @property {(layerId: string) => void} onLayerToggle - Callback when a layer's visibility is toggled
+ * @property {(type: string) => void} onLayerTypeChange - Callback when the active layer type is changed
+ */
 interface LayerControlsProps {
   layers: DataLayer[];
   activeLayerType: string;
@@ -10,6 +18,7 @@ interface LayerControlsProps {
   onLayerTypeChange: (type: string) => void;
 }
 
+// Map layer types to icons for UI representation
 const layerIcons = {
   species: PawPrint,
   water: Droplets,
@@ -17,6 +26,12 @@ const layerIcons = {
   events: Calendar,
 };
 
+/**
+ * A control panel component for managing map layer visibility
+ * @component
+ * @param {LayerControlsProps} props - The component props
+ * @returns {JSX.Element} A panel with layer toggle controls and type selection buttons
+ */
 export const LayerControls: React.FC<LayerControlsProps> = ({
   layers,
   activeLayerType,
@@ -27,6 +42,7 @@ export const LayerControls: React.FC<LayerControlsProps> = ({
     <div className="layer-controls">
       <h3 className="legend-title">Map Data Layers</h3>
 
+      {/* Render buttons for switching active layer types (with icons) */}
       <div className="layer-icons">
         {Object.entries(layerIcons).map(([type, Icon]) => (
           <button
@@ -44,6 +60,7 @@ export const LayerControls: React.FC<LayerControlsProps> = ({
         ))}
       </div>
 
+      {/* Render checkboxes for each available layer */}
       <div>
         {layers.map((layer) => (
           <div key={layer.id} className="layer-item">

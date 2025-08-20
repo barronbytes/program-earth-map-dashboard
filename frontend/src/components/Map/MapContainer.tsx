@@ -21,11 +21,22 @@ Icon.Default.mergeOptions({
     'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
+/**
+ * Props for the MapContainer component
+ * @interface MapContainerProps
+ * @property {MapPoint[]} points - Array of map points to display (landmarks, animals, etc.)
+ * @property {MapArea[]} areas - Array of map areas to display (zones, water bodies, etc.)
+ */
 interface MapContainerProps {
   points: MapPoint[];
   areas: MapArea[];
 }
 
+/**
+ * Creates a custom map marker icon based on the point type
+ * @param {string} type - The type of point ('landmark', 'animal', 'insect', 'plant')
+ * @returns {Icon} A Leaflet Icon instance with custom styling
+ */
 const createCustomIcon = (type: string) => {
   const colors = {
     landmark: '#e74c3c',
@@ -49,6 +60,12 @@ const createCustomIcon = (type: string) => {
   });
 };
 
+/**
+ * The main map component that displays geographical data using react-leaflet
+ * @component
+ * @param {MapContainerProps} props - The properties that define the map's data
+ * @returns {JSX.Element} A Leaflet map with markers and polygons
+ */
 export const MapContainer: React.FC<MapContainerProps> = ({
   points,
   areas,
@@ -59,11 +76,13 @@ export const MapContainer: React.FC<MapContainerProps> = ({
       zoom={11}
       style={{ height: '100%', width: '100%' }}
     >
+      {/* OpenStreetMap base layer */}
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
+      {/* Render map areas as polygons */}
       {areas.map((area) => (
         <Polygon
           key={area.id}
@@ -76,6 +95,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             opacity: 0.8,
           }}
         >
+          {/* Popup appears when the polygon is clicked */}
           <Popup>
             <div>
               <h4>{area.name}</h4>
@@ -85,6 +105,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
         </Polygon>
       ))}
 
+      {/* Render map points as markers with custom icons */}
       {points.map((point) => (
         <Marker
           key={point.id}

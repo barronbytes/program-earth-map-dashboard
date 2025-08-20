@@ -1,5 +1,10 @@
 import React from 'react';
 
+/**
+ * Legend component that explains the map's symbols and colors
+ * @component
+ * @returns {JSX.Element} A panel showing the map legend with point and area type descriptions
+ */
 export const MapLegend: React.FC = () => {
   return (
     <div className="map-legend">

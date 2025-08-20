@@ -6,6 +6,12 @@ import { useMapData } from '@/hooks/useMapData';
 import '@/styles/globals.css';
 import '@/styles/map.css';
 
+/**
+ * Main application component that composes the entire UI
+ * Manages the map state and renders the map with its controls
+ * @component
+ * @returns {JSX.Element} The complete application layout with header and map interface
+ */
 function App() {
   const {
     points,

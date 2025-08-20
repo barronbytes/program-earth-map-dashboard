@@ -1,5 +1,10 @@
 import type { MapPoint, MapArea, DataLayer } from '@/types/map';
 
+/**
+ * Mock data points representing various geographical features in the Manaus region
+ * Used for development and testing purposes
+ * @type {MapPoint[]}
+ */
 export const mockPoints: MapPoint[] = [
     {
         id: '1',
@@ -35,6 +40,11 @@ export const mockPoints: MapPoint[] = [
     }
 ];
 
+/**
+ * Mock area polygons representing different environmental zones
+ * Used for development and testing purposes
+ * @type {MapArea[]}
+ */
 export const mockAreas: MapArea[] = [
     {
         id: 'area-1',
@@ -64,6 +74,11 @@ export const mockAreas: MapArea[] = [
     }
 ];
 
+/**
+ * Mock layer configurations representing different data visualization options
+ * Used for development and testing purposes
+ * @type {DataLayer[]}
+ */
 export const mockLayers: DataLayer[] = [
     {
         id: 'species-layer',
