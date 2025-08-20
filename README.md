@@ -1,6 +1,6 @@
 # Map Dashboard
 
-A web-based dashboard for visualizing campaign, environmental, and geographic data. The project features an interactive frontend built with Vue.js and Vite, and a backend for data processing and management.
+A web-based dashboard for visualizing campaign, environmental, and geographic data. The project features an interactive frontend built with React and Vite, and a backend for data processing and management.
 
 ## Project Purpose
 
@@ -56,7 +56,7 @@ Visit http://localhost:5173 in your browser.
 
 ## Folder Structure
 
-- `frontend/` — Vue.js app, UI components, assets
+- `frontend/` — React app, UI components, assets
 - `backend/` — Data files, images, QGIS project, backend scripts
 
 ## License
