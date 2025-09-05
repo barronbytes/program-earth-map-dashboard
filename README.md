@@ -1,54 +1,85 @@
-# [Hackathon Guide](https://docs.google.com/document/d/11nFkKL7Rdhak7AVNIKkiDl1Cfle-VXqzvsP37AH6ddE/edit?usp=sharing)
-<div align="center">
-   <h1>Map Dashboard Web Application</h1>
-   <p>
-      This repository houses the source code for the Map Dashboard data visualization web application project. It uses
-      <a href="https://vuejs.org/"><strong>Vue 3</strong></a>
-      and
-      <a href="https://vuetifyjs.com/en/"><strong>Vuetify</strong></a>.
-   </p>
-</div>
+# Map Dashboard Frontend
 
-## Recommended IDE Setup
+A modern, interactive map dashboard built with React and Vite. This project provides a user-friendly interface for visualizing and interacting with geospatial data layers.
 
-We **highly** recommend [VS Code](https://code.visualstudio.com/) for its great plugins. The project is also setup for auto-linting with VSCode on file save! You'll need at least the [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) plugin. Once you open the source code in VSCode, some other convenient plugins should also be recommended to you.
-
-# Features & Implementation Details
-
-
-## Important Links
-
-This project currently uses Tableau to format geospatial input data. Tableau has an extensive library of [tutorials](https://www.tableau.com/resources) and [API documentation](https://www.tableau.com/developer/tools?category=19921).
-
+![Map Web App Preview](./public/map-preview.png)
 
 ## Features
 
-The Map Dashboard will display 3 types of map data:
-1. Base map using our data from Notion
-2. Water department polygons showing water volume (gradient of blue shades)
-3. Canopy density (using transparency layer or classified zones; gradient of green shades)
+- Interactive map visualization (placeholder, ready for integration)
+- Layer controls for toggling map data
+- Custom UI components (Button, CheckBox)
+- Responsive layout and styling
+- Mock data for development and testing
+- Modular component structure
 
-There are 2 types of map marker pins; pins can be grouped or clustered:
-1. Plants: green pins
-2. Animals: red pins
+## Prerequisites
 
-Users can hover over marker pins and map data to view a tooltip that displays any of the following information:
-1. Name of the animal or plant
-2. Water volume
-3. Canopy cover
+- Node.js (v18 or higher recommended)
+- npm (v9 or higher)
 
-Users can filter the map by:
-- Animal vs plant
-- Water volume
-- Canopy density
+## Installation
 
-## Architecture
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/OpenSourceFellows/map-dashboard.git
+   cd map-dashboard/frontend
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
 
-| Component           | Technology                                     |
-|---------------------|------------------------------------------------|
-| Notion Database     | Notion API                                     |
-| PostgresSQL Storage | Postgres + Post GIS (optiona)                  |
-| Visualization       | Tableau (Desktop/Server/Cloud)                 |
-| Automation          | GitHub Actions, Cron jobs                      |
-| Water Data          | Shapefiles/CSVs into Postgres                  |
-| Canopy Data         | Meta Canopy Map GeoTIFF/GeoJSON                |
+## Development
+
+To start the development server:
+
+```sh
+npm run dev
+```
+
+The app will be available at `http://localhost:5173` by default.
+
+## Project Structure
+
+```
+frontend/
+├── public/           # Static assets
+├── src/              # Source code
+│   ├── components/   # UI and map components
+│   ├── data/         # Mock data
+│   ├── hooks/        # Custom React hooks
+│   ├── styles/       # CSS files
+│   ├── types/        # TypeScript types
+│   ├── App.tsx       # Main app component
+│   └── main.tsx      # Entry point
+├── package.json      # Project metadata and scripts
+├── vite.config.ts    # Vite configuration
+└── README.md         # Project documentation
+```
+
+## Tools & Libraries
+
+- [React](https://react.dev/) – UI library
+- [Vite](https://vitejs.dev/) – Fast build tool
+- [TypeScript](https://www.typescriptlang.org/) – Type safety
+- [ESLint](https://eslint.org/) – Linting
+
+## Custom Components
+
+- `Header` – App title and navigation
+- `MapContainer` – Map area and controls
+- `LayerControls` – Toggle map layers
+- `MapLegend` – Map legend
+- `Button` & `CheckBox` – UI elements
+
+## How to Contribute
+
+1. Clone the repository
+2. Create a new branch (`git checkout -b feature/your-feature`)
+3. Commit your changes
+4. Push to your branch and open a pull request
+
+## License
+
+This project is open source and available under the MIT License.

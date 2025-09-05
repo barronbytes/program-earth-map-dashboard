@@ -1,0 +1,23 @@
+{
+  "name": "map-dashboard",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A Vue 3 and Vuetify-powered web application for data visualization using maps.",
+  "main": "src/js/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/js/index.js",
+    "dev": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@notionhq/client": "^3.1.1",
+    "dotenv": "^16.5.0",
+    "pg": "^8.16.0"
+  },
+  "devDependencies": {
+    "vite": "^7.0.6"
+  }
+}
