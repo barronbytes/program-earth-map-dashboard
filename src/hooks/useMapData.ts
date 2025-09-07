@@ -22,17 +22,31 @@ export const useMapData = () => {
     const [layers, setLayers] = useState<DataLayer[]>(mockLayers);
     // Currently selected layer type (e.g. 'species', 'events')
     const [activeLayerType, setActiveLayerType] = useState<string>('species');
+    // Error state for debugging
+    const [error, setError] = useState<string | null>(null);
 
     /**
      * Toggle visibility of a data layer by ID
      * Updates the 'visible' property of the matching layer
      */
     const toggleLayer = useCallback((layerId: string) => {
-        setLayers(prev => prev.map(layer =>
-            layer.id === layerId
-                ? { ...layer, visible: !layer.visible }
-                : layer
-        ));
+        try {
+            setLayers(prev => {
+                const layerExists = prev.some(layer => layer.id === layerId);
+                if (!layerExists) {
+                    setError(`Layer with ID '${layerId}' not found`);
+                    return prev;
+                }
+                setError(null);
+                return prev.map(layer =>
+                    layer.id === layerId
+                        ? { ...layer, visible: !layer.visible }
+                        : layer
+                );
+            });
+        } catch (err) {
+            setError(`Error toggling layer: ${err instanceof Error ? err.message : 'Unknown error'}`);
+        }
     }, []);
 
     /**
@@ -79,6 +93,7 @@ export const useMapData = () => {
         layers,
         activeLayerType,
         setActiveLayerType,
-        toggleLayer
+        toggleLayer,
+        error
     };
 };

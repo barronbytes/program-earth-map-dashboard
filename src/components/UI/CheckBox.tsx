@@ -34,11 +34,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       checked={checked}
       onChange={(e) => onChange(e.target.checked)}
       disabled={disabled}
-      style={{
-        width: '16px',
-        height: '16px',
-        cursor: disabled ? 'not-allowed' : 'pointer',
-      }}
+      className={`checkbox-input ${disabled ? 'checkbox-input--disabled' : ''}`}
     />
   );
 };
