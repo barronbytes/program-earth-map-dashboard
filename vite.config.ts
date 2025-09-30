@@ -9,4 +9,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    host: true, // Enables binding to both IPv4 and IPv6
+    port: 5173
+  },
 })
