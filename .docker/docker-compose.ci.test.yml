@@ -1,0 +1,18 @@
+services:
+  map_dashboard:
+    container_name: "map_dashboard_ci"
+    build:
+      context: ../
+      dockerfile: .docker/Dockerfile
+    volumes:
+      - type: bind
+        source: "../"
+        target: "/app"
+      - /app/node_modules
+    command: ["sh", "-c", "pnpm install --frozen-lockfile && pnpm test"]
+    networks:
+      - dashboard_dev
+
+networks:
+  dashboard_dev:
+    external: true
