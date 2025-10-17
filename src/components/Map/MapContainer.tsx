@@ -2,14 +2,13 @@ import React from 'react';
 import {
   MapContainer as LeafletMapContainer,
   TileLayer,
-  Marker,
-  Popup,
-  Polygon,
 } from 'react-leaflet';
+import { Layer } from './Layer'
 import { Icon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import type { MapPoint, MapArea } from '@/types/map';
+import type { FeatureCollection } from '@/types/geometry';
 
+/*
 // Fix for default markers in react-leaflet
 delete (Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
 Icon.Default.mergeOptions({
@@ -20,6 +19,7 @@ Icon.Default.mergeOptions({
   shadowUrl:
     'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
+*/
 
 /**
  * Props for the MapContainer component
@@ -28,8 +28,7 @@ Icon.Default.mergeOptions({
  * @property {MapArea[]} areas - Array of map areas to display (zones, water bodies, etc.)
  */
 interface MapContainerProps {
-  points: MapPoint[];
-  areas: MapArea[];
+  layers: FeatureCollection[]
 }
 
 /**
@@ -37,6 +36,7 @@ interface MapContainerProps {
  * @param {string} type - The type of point ('landmark', 'animal', 'insect', 'plant')
  * @returns {Icon} A Leaflet Icon instance with custom styling
  */
+/*
 const createCustomIcon = (type: string): Icon => {
   const colors: Record<string, string> = {
     landmark: '#e74c3c',
@@ -59,6 +59,7 @@ const createCustomIcon = (type: string): Icon => {
     popupAnchor: [0, -41],
   });
 };
+*/
 
 /**
  * The main map component that displays geographical data using react-leaflet
@@ -67,8 +68,7 @@ const createCustomIcon = (type: string): Icon => {
  * @returns {JSX.Element} A Leaflet map with markers and polygons
  */
 export const MapContainer: React.FC<MapContainerProps> = ({
-  points,
-  areas,
+  layers
 }) => {
   return (
     <div className="map-wrapper">
@@ -84,46 +84,8 @@ export const MapContainer: React.FC<MapContainerProps> = ({
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {/* Render map areas as polygons */}
-      {areas.map((area) => (
-        <Polygon
-          key={area.id}
-          positions={area.coordinates}
-          pathOptions={{
-            color: area.color,
-            fillColor: area.color,
-            fillOpacity: area.opacity,
-            weight: 2,
-            opacity: 0.8,
-          }}
-        >
-          {/* Popup appears when the polygon is clicked */}
-          <Popup>
-            <div>
-              <h4>{area.name}</h4>
-              <p>Type: {area.type}</p>
-            </div>
-          </Popup>
-        </Polygon>
-      ))}
-
-      {/* Render map points as markers with custom icons */}
-      {points.map((point) => (
-        <Marker
-          key={point.id}
-          position={[point.lat, point.lng]}
-          icon={createCustomIcon(point.type)}
-        >
-          <Popup>
-            <div>
-              <h4>{point.name}</h4>
-              <p>
-                <strong>Type:</strong> {point.type}
-              </p>
-              {point.description && <p>{point.description}</p>}
-            </div>
-          </Popup>
-        </Marker>
+      {layers.map((layer, idx) => (
+        <Layer key={idx} featureCollection={layer} />
       ))}
       </LeafletMapContainer>
     </div>

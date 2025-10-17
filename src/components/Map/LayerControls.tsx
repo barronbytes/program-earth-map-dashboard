@@ -1,21 +1,12 @@
 import React from 'react';
 import { PawPrint, Droplets, Mountain, Calendar } from 'lucide-react';
-import type { DataLayer } from '@/types/map';
 import { Checkbox } from '@/components/UI/CheckBox';
+import type { LayerVisibilityMap } from '@/types/map';
 
-/**
- * Props for the LayerControls component
- * @interface LayerControlsProps
- * @property {DataLayer[]} layers - Array of available map layers
- * @property {string} activeLayerType - Currently selected layer type
- * @property {(layerId: string) => void} onLayerToggle - Callback when a layer's visibility is toggled
- * @property {(type: string) => void} onLayerTypeChange - Callback when the active layer type is changed
- */
+
 interface LayerControlsProps {
-  layers: DataLayer[];
-  activeLayerType: string;
-  onLayerToggle: (layerId: string) => void;
-  onLayerTypeChange: (type: string) => void;
+  visibilityMap: LayerVisibilityMap,
+  onLayerChange: (visibilityMap: LayerVisibilityMap) => void;
 }
 
 // Map layer types to icons for UI representation
@@ -33,17 +24,16 @@ const layerIcons = {
  * @returns {JSX.Element} A panel with layer toggle controls and type selection buttons
  */
 export const LayerControls: React.FC<LayerControlsProps> = ({
-  layers,
-  activeLayerType,
-  onLayerToggle,
-  onLayerTypeChange,
+  visibilityMap,
+  onLayerChange
 }) => {
   return (
     <div className="layer-controls">
       <h3 className="legend-title">Map Data Layers</h3>
 
       {/* Render buttons for switching active layer types (with icons) */}
-      <div className="layer-icons">
+      {/*
+        <div className="layer-icons">
         {Object.entries(layerIcons).map(([type, Icon]) => (
           <button
             key={type}
@@ -59,19 +49,20 @@ export const LayerControls: React.FC<LayerControlsProps> = ({
           </button>
         ))}
       </div>
+      */}
+      
 
       {/* Render checkboxes for each available layer */}
       <div>
-        {layers.map((layer) => (
-          <div key={layer.id} className="layer-item">
+        {Object.entries(visibilityMap).map(([k, v], idx) => (
+          <div key={idx} className="layer-item">
             <Checkbox
-              id={layer.id}
-              checked={layer.visible}
-              onChange={() => onLayerToggle(layer.id)}
+              id={idx}
+              checked={v}
+              onChange={() => onLayerChange({...visibilityMap, [k]: !v})}
             />
             <div className="layer-info">
-              <div className="layer-name">{layer.name}</div>
-              <div className="layer-description">{layer.description}</div>
+              <div className="layer-name">{k}</div>
             </div>
           </div>
         ))}

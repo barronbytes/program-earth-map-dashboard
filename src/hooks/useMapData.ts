@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
-import type { MapPoint, MapArea, DataLayer } from '@/types/map';
-import { mockPoints, mockAreas, mockLayers } from '@/data/mockData';
+import type { FeatureCollection } from 'geojson'
+// import type { MapPoint, MapArea, DataLayer } from '@/types/map';
+// import { mockPoints, mockAreas, mockLayers } from '@/data/mockData';
 
 /**
  * Custom hook for managing map data state and layer visibility
@@ -13,13 +14,14 @@ import { mockPoints, mockAreas, mockLayers } from '@/data/mockData';
  * @property {(layerId: string) => void} toggleLayer - Function to toggle layer visibility
  */
 
-export const useMapData = () => {
+export const useMapData = (collections: FeatureCollection[]) => {
     // Static data: All map points
-    const [points] = useState<MapPoint[]>(mockPoints);
+    // const [points] = useState<MapPoint[]>(mockPoints);
     // Static data: All map areas
-    const [areas] = useState<MapArea[]>(mockAreas);
+    // const [areas] = useState<MapArea[]>(mockAreas);
     // Dynamic data: List of all data layers with their visibility
-    const [layers, setLayers] = useState<DataLayer[]>(mockLayers);
+
+    const [layers, setLayers] = useState<FeatureCollection[]>(collections);
     // Currently selected layer type (e.g. 'species', 'events')
     const [activeLayerType, setActiveLayerType] = useState<string>('species');
     // Error state for debugging
@@ -53,6 +55,7 @@ export const useMapData = () => {
      * Filter visible points based on active layers
      * Only points whose type corresponds to a visible layer are shown
      */
+    /*
     const visiblePoints = points.filter(point => {
         const relevantLayer = layers.find(layer => {
             switch (point.type) {
@@ -72,11 +75,13 @@ export const useMapData = () => {
         // Always show landmarks (fallback), or points with matching visible layers
         return relevantLayer || point.type === 'landmark';
     });
+    */
 
     /**
      * Filter visible areas based on active layers
      * An area is shown only if its layer type is visible
      */
+    /*
     const visibleAreas = areas.filter(area => {
         const relevantLayer = layers.find(layer =>
             layer.type === area.type && layer.visible
@@ -85,6 +90,7 @@ export const useMapData = () => {
         // Include only if there's a visible matching layer
         return !!relevantLayer;
     });
+    */
 
     // Return the filtered data and state-modifying functions
     return {
