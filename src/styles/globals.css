@@ -1,7 +1,9 @@
 * {
     margin: 0;
+    border: 0;
     padding: 0;
     box-sizing: border-box;
+    background: none;
 }
 
 body {
@@ -9,6 +11,22 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
+}
+
+ul, ol, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button, input, textarea, select {
+    border: none;
+    background: none;
+    color: inherit;
+    font: inherit;
 }
 
 /* Dark mode body */

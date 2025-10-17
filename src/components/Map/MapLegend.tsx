@@ -1,60 +1,110 @@
-import React from 'react';
+import React, { type JSX } from 'react';
+import { Box, Container, Typography, type TypographyProps } from '@mui/material';
+import { styled } from '@mui/material/styles';
+
+// Styled component for legend subtitles
+const LegendSubtitle = styled(Typography)<TypographyProps>(({ theme }) => ({
+  marginBottom: theme.spacing(1),
+  fontSize: '14px',
+  fontWeight: 600,
+  color: '#33495e',
+  '.dark &': {
+    color: '#cbd5e1',
+  },
+}));
 
 /**
  * Legend component that explains the map's symbols and colors
  * @component
  * @returns {JSX.Element} A panel showing the map legend with point and area type descriptions
  */
-export const MapLegend: React.FC = () => {
+export const MapLegend: React.FC = (): JSX.Element => {
   return (
-    <div className="map-legend">
-      <div className="legend-section">
-        <h3 className="legend-title">Legend</h3>
+    <Container 
+      className="map-legend"
+      maxWidth={false}
+      sx={{
+        maxWidth: '300px',
+        position: 'absolute',
+        top: '20px',
+        left: '20px',
+        padding: '24px',
+        zIndex: 1000,
+      }}
+    >
+      <Box
+        className="legend-section"
+        sx={{
+          mb: 2.5, // 1 = 8px (MUI spacing) → so 2.5 ≈ 20px
+          '&:last-child': {
+            mb: 0
+          }
+        }}
+      >
+        <Typography
+          component="h3"
+          className="legend-title"
+          sx={{
+            mb: 1.5, // 1 = 8px (MUI spacing) → so 1.5 ≈ 12px
+            fontSize: '18px',
+            fontWeight: 600,
+            color: '#2c3e50', // Light mode color
+            '.dark &': { color: '#f1f5f9', },
+          }}
+        >
+          Legend
+        </Typography>
 
-        <div className="legend-subsection">
-          <h4 className="legend-subtitle">
+        <Box className="legend-subsection">
+          <LegendSubtitle
+            component="h4"
+            className="legend-subtitle"
+          >
             Points
-          </h4>
-          <div className="legend-items">
-            <div className="legend-item">
-              <div className="legend-icon landmark"></div>
+          </LegendSubtitle>
+          <Box className="legend-items">
+            <Box className="legend-item">
+              <Box className="legend-icon landmark"></Box>
               <span>Landmark</span>
-            </div>
-            <div className="legend-item">
-              <div className="legend-icon animal"></div>
+            </Box>
+            <Box className="legend-item">
+              <Box className="legend-icon animal"></Box>
               <span>Animals</span>
-            </div>
-            <div className="legend-item">
-              <div className="legend-icon insect"></div>
+            </Box>
+            <Box className="legend-item">
+              <Box className="legend-icon insect"></Box>
               <span>Insect</span>
-            </div>
-            <div className="legend-item">
-              <div className="legend-icon plant"></div>
+            </Box>
+            <Box className="legend-item">
+              <Box className="legend-icon plant"></Box>
               <span>Plants</span>
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
 
-        <div>
-          <h4 className="legend-subtitle">
+        <Box>
+          <LegendSubtitle 
+            component="h4"
+            className="legend-subtitle"
+          >
             Areas
-          </h4>
-          <div className="legend-items">
-            <div className="area-legend-item">
-              <div className="area-legend-icon area-legend-icon--species"></div>
+          </LegendSubtitle>
+          <Box className="legend-items">
+            <Box className="area-legend-item">
+              <Box className="area-legend-icon area-legend-icon--species"></Box>
               <span>Species</span>
-            </div>
-            <div className="area-legend-item">
-              <div className="area-legend-icon area-legend-icon--water"></div>
+            </Box>
+            <Box className="area-legend-item">
+              <Box className="area-legend-icon area-legend-icon--water"></Box>
               <span>Water Bodies</span>
-            </div>
-            <div className="area-legend-item">
-              <div className="area-legend-icon area-legend-icon--soil"></div>
+            </Box>
+            <Box className="area-legend-item">
+              <Box className="area-legend-icon area-legend-icon--soil"></Box>
               <span>Soil</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Container>
   );
 };
