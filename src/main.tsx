@@ -1,4 +1,4 @@
-import React, { useMemo, useState, createContext } from 'react';
+import React, { useMemo, useState, createContext, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import { ThemeProvider, createTheme, CssBaseline, GlobalStyles } from '@mui/material';
@@ -19,6 +19,16 @@ function Main() {
   const [mode, setMode] = useState<ThemeMode>(
     (localStorage.getItem('darkMode') as ThemeMode) || 'light'
   );
+
+  // useEffect to sync HTML <html> class with mode
+  useEffect(() => {
+    const root = document.documentElement; // <html> element
+    if (mode === 'dark') {
+      root.classList.add('dark');    // apply dark mode CSS
+    } else {
+      root.classList.remove('dark'); // default light mode
+    }
+  }, [mode]);
 
   // Toggle function for dark/light mode
   const toggleColorMode = () => {
