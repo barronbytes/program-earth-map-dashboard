@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from '@mui/material';
 import {
   MapContainer as LeafletMapContainer,
   TileLayer,
@@ -71,7 +72,13 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   areas,
 }) => {
   return (
-    <div className="map-wrapper">
+    <Box 
+      className="map-wrapper"
+      sx={{
+        width: '100%',
+        height: '100%'
+      }}
+    >
       <LeafletMapContainer
         center={[-3.1319, -60.0261]}
         zoom={11}
@@ -126,6 +133,6 @@ export const MapContainer: React.FC<MapContainerProps> = ({
         </Marker>
       ))}
       </LeafletMapContainer>
-    </div>
+    </Box>
   );
 };
