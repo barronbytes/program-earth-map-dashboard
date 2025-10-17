@@ -31,18 +31,11 @@
 }
 
 .layer-controls {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    border: 3px solid rgba(102, 126, 234, 0.6);
+    border-radius: 16px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
     backdrop-filter: blur(10px);
-    border-radius: 16px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    padding: 24px;
-    z-index: 1000;
-    min-width: 250px;
-    border: 3px solid rgba(102, 126, 234, 0.6);
-    transition: all 0.3s ease;
 }
 
 .layer-controls:hover {
@@ -127,15 +120,9 @@
 }
 
 .layer-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 16px;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(102, 126, 234, 0.15);
-    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
 }
 
 .layer-item:hover {
@@ -161,26 +148,12 @@
     line-height: 1.4;
 }
 
-.layer-icons {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 20px;
-    justify-content: center;
-}
-
 .layer-icon-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 16px;
     border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.1);
     border: 2px solid rgba(102, 126, 234, 0.2);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
-    min-width: 80px;
+    transition: all 0.3s ease;
 }
 
 .layer-icon-button:hover {
@@ -205,13 +178,6 @@
 .layer-icon-button.active svg {
     color: white !important;
     fill: white !important;
-}
-
-
-.layer-icon-text {
-    font-size: 12px;
-    color: #5a6c7d;
-    font-weight: 500;
 }
 
 .header {
@@ -344,10 +310,6 @@
 
 .dark .layer-icon-text {
     color: #94a3b8;
-}
-
-.dark .layer-icon-button.active .layer-icon-text {
-    color: white !important;
 }
 
 .dark .layer-icon-button.active svg {

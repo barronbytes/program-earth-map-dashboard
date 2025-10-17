@@ -1,7 +1,7 @@
 import React from 'react';
 import { PawPrint, Droplets, Mountain, Calendar } from 'lucide-react';
 import type { DataLayer } from '@/types/map';
-import { Checkbox, FormControlLabel } from '@mui/material'; // Use MUI Checkbox
+import { Box, Typography, Button, Checkbox, FormControlLabel } from '@mui/material';
 
 /**
  * Props for the LayerControls component
@@ -39,31 +39,91 @@ export const LayerControls: React.FC<LayerControlsProps> = ({
   onLayerTypeChange,
 }) => {
   return (
-    <div className="layer-controls">
-      <h3 className="legend-title">Map Data Layers</h3>
+    <Box 
+      className="layer-controls"
+      sx={{
+        minWidth: 250,
+        position: 'absolute',
+        top: 20,
+        right: 20,
+        padding: 3, // same as 24px
+        zIndex: 1000,
+        transition: 'all 0.3s ease',
+      }}
+    >
+      <Typography
+        component="h3"
+        className="legend-title"
+        sx={{
+          mb: 1.5, // 1 = 8px (MUI spacing) → so 1.5 ≈ 12px
+          fontSize: '18px',
+          fontWeight: 600,
+          color: '#2c3e50', // Light mode color
+          '.dark &': { color: '#f1f5f9', },
+        }}
+      >
+        Map Data Layers
+      </Typography>
 
       {/* Render buttons for switching active layer types (with icons) */}
-      <div className="layer-icons">
+      <Box 
+        className="layer-icons"
+          sx={{
+            mb: 2.5, // 2.5 (MUI spacing) → 20px
+            display: 'flex',
+            gap: 2, // 2 (MUI spacing) → 16px
+            justifyContent: 'center',
+          }}
+      >
         {Object.entries(layerIcons).map(([type, Icon]) => (
-          <button
+          <Button
             key={type}
             className={`layer-icon-button ${
               activeLayerType === type ? 'active' : ''
             }`}
             onClick={() => onLayerTypeChange(type)}
+            variant="text"
+            sx={{
+              minWidth: 80,
+              p: 2, // 16px
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 1, // 8px
+              cursor: 'pointer',
+            }}
           >
             <Icon size={20} />
-            <span className="layer-icon-text">
+            <Typography 
+              component="span"
+              className="layer-icon-text"
+              sx={{
+                fontSize: 12,
+                fontWeight: 500,
+                color: '#5a6c7d !important',
+              }}
+            >
               {type.charAt(0).toUpperCase() + type.slice(1)}
-            </span>
-          </button>
+            </Typography>
+          </Button>
         ))}
-      </div>
+      </Box>
 
       {/* Render MUI checkboxes for each available layer */}
-      <div>
+      <Box>
         {layers.map((layer) => (
-          <div key={layer.id} className="layer-item">
+          <Box 
+            key={layer.id} 
+            className="layer-item"
+            sx={{
+              mb: 1, // 8px
+              borderRadius: 1.5, // 12px
+              p: 2, // 16px
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: 1.5, // 12px
+            }}
+          >
             <FormControlLabel
               control={
                 <Checkbox
@@ -72,11 +132,11 @@ export const LayerControls: React.FC<LayerControlsProps> = ({
                   color="primary"
                 />
               }
-              label={layer.name}
+              label={<Typography>{layer.name}</Typography>}
             />
-          </div>
+          </Box>
         ))}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
