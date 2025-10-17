@@ -13,20 +13,8 @@ body {
 
 /* Dark mode body */
 .app-container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    margin: 10px;
-    overflow: hidden;
-}
-
-/* Dark mode app container */
-.main-content {
-    flex: 1;
-    position: relative;
-    overflow: hidden;
 }
 
 /* Checkbox component styles */
