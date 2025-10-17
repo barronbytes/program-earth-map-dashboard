@@ -1,7 +1,7 @@
 import React from 'react';
 import { PawPrint, Droplets, Mountain, Calendar } from 'lucide-react';
 import type { DataLayer } from '@/types/map';
-import { Checkbox } from '@/components/UI/CheckBox';
+import { Checkbox, FormControlLabel } from '@mui/material'; // Use MUI Checkbox
 
 /**
  * Props for the LayerControls component
@@ -60,19 +60,20 @@ export const LayerControls: React.FC<LayerControlsProps> = ({
         ))}
       </div>
 
-      {/* Render checkboxes for each available layer */}
+      {/* Render MUI checkboxes for each available layer */}
       <div>
         {layers.map((layer) => (
           <div key={layer.id} className="layer-item">
-            <Checkbox
-              id={layer.id}
-              checked={layer.visible}
-              onChange={() => onLayerToggle(layer.id)}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={layer.visible}
+                  onChange={() => onLayerToggle(layer.id)}
+                  color="primary"
+                />
+              }
+              label={layer.name}
             />
-            <div className="layer-info">
-              <div className="layer-name">{layer.name}</div>
-              <div className="layer-description">{layer.description}</div>
-            </div>
           </div>
         ))}
       </div>
