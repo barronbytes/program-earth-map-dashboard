@@ -1,3 +1,13 @@
+// Layers are controlled by a "Visibility Map"
+// On data load, the name of a layer is added to the map,
+// along with a visibility boolean.
+// A value of 0 is not shown.
+export interface LayerVisibilityMap {
+  [layerName: string]: boolean
+}
+
+
+
 /**
  * Represents a geographic point on the map with associated metadata
  * @interface MapPoint
