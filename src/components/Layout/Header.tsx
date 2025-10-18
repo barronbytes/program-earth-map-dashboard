@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Globe, Moon, Sun } from 'lucide-react';
+import { ColorModeContext } from '@/main.tsx'; // import the context
 
 /**
  * Header component with the application logo, title, and dark mode toggle
@@ -7,28 +8,19 @@ import { Globe, Moon, Sun } from 'lucide-react';
  * @returns {JSX.Element} The application header with ProgramEarth branding and dark mode toggle
  */
 export const Header: React.FC = () => {
+  const { toggleColorMode } = useContext(ColorModeContext); // get toggle function from context
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Load dark mode preference from localStorage on mount
   useEffect(() => {
     const savedTheme = localStorage.getItem('darkMode');
-    if (savedTheme === 'true') {
-      setIsDarkMode(true);
-      document.documentElement.classList.add('dark');
-    }
+    setIsDarkMode(savedTheme === 'dark');
   }, []);
 
-  // Toggle dark mode and save preference
-  const toggleDarkMode = () => {
-    const newDarkMode = !isDarkMode;
-    setIsDarkMode(newDarkMode);
-    localStorage.setItem('darkMode', newDarkMode.toString());
-    
-    if (newDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+  // Toggle dark mode using context
+  const handleToggle = () => {
+    toggleColorMode(); // call context to switch mode
+    setIsDarkMode((prev) => !prev); // update local state for button label & icon only
   };
 
   return (
@@ -47,7 +39,7 @@ export const Header: React.FC = () => {
           </span>
           <button
             className={`dark-mode-toggle ${isDarkMode ? 'dark-mode-toggle--active' : ''}`}
-            onClick={toggleDarkMode}
+            onClick={handleToggle}
             aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
           >
             <div className="dark-mode-toggle__slider">

@@ -65,34 +65,9 @@ button, input, textarea, select {
   --body-bg-default-end: #16213e;
 }
 
-/* Dark mode body */
-.dark body {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-}
-
+/* App Container */
 .app-container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    margin: 10px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-/* Dark mode app container */
-.dark .app-container {
-    background: rgba(0, 0, 0, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.main-content {
-    flex: 1;
-    position: relative;
-    overflow: hidden;
+    backdrop-filter: blur(var(--app-blur));
 }
 
 /* Checkbox component styles */
